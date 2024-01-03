@@ -1,0 +1,8 @@
+userName,yearsActive,numberOfTotalPurchases,totalSpendEUR,regionEU,preferredPaymentMethod
+Alice,5,120,1500.5,Yes,PayPal
+Bob,3,85,980.0,No,VISA
+Charlie,7,200,2200.75,Yes,BitCoin
+Diana,4,150,1850.2,No,Stripe
+Edward,6,170,2100.0,Yes,VISA
+Fiona,2,50,600.3,Yes,PayPal
+George,8,230,2500.6,No,BitCoin
