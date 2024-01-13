@@ -17,6 +17,7 @@ public class MenuBar extends JMenuBar {
     private JMenuItem selectAllMenuItem;
     private JMenuItem fstEncoding;
     private JMenuItem sndEncoding;
+    private MenuBarListener menuBarListener;
 
 
 
@@ -61,6 +62,67 @@ public class MenuBar extends JMenuBar {
         add(fileMenu);
         add(editMenu);
         add(encodingMenu);
+        activateComps();
     }
+
+
+    public void activateComps() {
+        saveMenuItem.addActionListener(e -> {
+            if (menuBarListener != null) {
+                menuBarListener.saveItemClicked(new MenuBarEvent(this));
+            }
+        });
+        loadMenuItem.addActionListener(e -> {
+            if (menuBarListener != null) {
+                menuBarListener.loadItemClicked(new MenuBarEvent(this));
+            }
+        });
+        undoMenuItem.addActionListener(e -> {
+            if (menuBarListener != null) {
+                menuBarListener.undoItemClicked(new MenuBarEvent(this));
+            }
+        });
+        redoMenuItem.addActionListener(e -> {
+            if (menuBarListener != null) {
+                menuBarListener.redoItemClicked(new MenuBarEvent(this));
+            }
+        });
+        cutMenuItem.addActionListener(e -> {
+            if (menuBarListener != null) {
+                menuBarListener.cutItemClicked(new MenuBarEvent(this));
+            }
+        });
+        copyMenuItem.addActionListener(e -> {
+            if (menuBarListener != null) {
+                menuBarListener.copyItemClicked(new MenuBarEvent(this));
+            }
+        });
+        pasteMenuItem.addActionListener(e -> {
+            if (menuBarListener != null) {
+                menuBarListener.pasteItemClicked(new MenuBarEvent(this));
+            }
+        });
+        selectAllMenuItem.addActionListener(e -> {
+            if (menuBarListener != null) {
+                menuBarListener.selectAllItemClicked(new MenuBarEvent(this));
+            }
+        });
+        fstEncoding.addActionListener(e -> {
+            if (menuBarListener != null) {
+                menuBarListener.fstEncodingItemClicked(new MenuBarEvent(this));
+            }
+        });
+        sndEncoding.addActionListener(e -> {
+            if (menuBarListener != null) {
+                menuBarListener.sndEncodingItemClicked(new MenuBarEvent(this));
+            }
+        });
+    }
+
+
+
+    public void setMenuBarListener(MenuBarListener menuBarListener) {
+        this.menuBarListener = menuBarListener;
+        }
     
 }
