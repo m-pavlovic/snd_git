@@ -8,7 +8,6 @@ import javax.swing.JTextArea;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class ViewPanel extends JPanel {
     
@@ -116,7 +115,7 @@ public class ViewPanel extends JPanel {
         textArea.setText(string);
     }
 
-    public Object getTextArea() {
-        return textArea;
+    public String getTextArea() {
+        return textArea.getText();
     }
 }

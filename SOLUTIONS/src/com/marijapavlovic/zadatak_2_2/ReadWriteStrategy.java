@@ -5,5 +5,5 @@ public interface ReadWriteStrategy {
 
     StringBuffer loadFromFile(String path);
 
-    void saveToFile(String path, Object textArea);
+    void saveToFile(String path, String textArea);
 }

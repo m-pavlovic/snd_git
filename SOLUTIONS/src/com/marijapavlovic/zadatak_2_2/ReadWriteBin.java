@@ -21,11 +21,11 @@ public class ReadWriteBin implements ReadWriteStrategy {
     }
 
     @Override
-    public void saveToFile(String path, Object textArea) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(path), true))){
-            oos.writeObject(this);
+    public void saveToFile(String path, String textArea) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(path)))){
+            oos.writeObject(textArea);
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Error while writing to file.");
         }
 
     }

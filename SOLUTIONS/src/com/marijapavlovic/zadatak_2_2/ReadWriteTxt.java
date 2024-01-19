@@ -1,5 +1,6 @@
 package com.marijapavlovic.zadatak_2_2;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,21 +12,24 @@ public class ReadWriteTxt implements ReadWriteStrategy {
     public StringBuffer loadFromFile(String path) {
         StringBuffer sb = new StringBuffer();
         try {
-            while (true) {
-                sb.append(this.toString() + "\n");
+            BufferedReader br = new BufferedReader(new java.io.FileReader(new File(path)));
+            String line;
+            while ((line = br.readLine()) != null){
+                sb.append(line).append("\n");
             }
+            br.close();
         } catch (Exception e){
-            System.out.println("End of file reached.");
+            e.printStackTrace();
         }
         return sb;
     }
 
     @Override
-    public void saveToFile(String path, Object textArea) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(path), true))) {
-            while (true) {
-                bw.write(this.toString() + "\n");
-            }
+    public void saveToFile(String path, String textArea) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(path)));
+            bw.write(textArea);
+            bw.close();
         } catch (Exception e){
             e.printStackTrace();
         }
