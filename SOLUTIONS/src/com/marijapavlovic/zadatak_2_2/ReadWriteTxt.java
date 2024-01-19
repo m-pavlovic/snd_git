@@ -25,10 +25,10 @@ public class ReadWriteTxt implements ReadWriteStrategy {
     }
 
     @Override
-    public void saveToFile(String path, String textArea) {
+    public void saveToFile(String path, Object textArea) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(new File(path)));
-            bw.write(textArea);
+            bw.write((Integer) textArea);
             bw.close();
         } catch (Exception e){
             e.printStackTrace();

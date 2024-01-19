@@ -107,21 +107,26 @@ public class MainFrame extends JFrame {
 
             @Override
             public void copyItemClicked(MenuBarEvent event) {
+                CommandsInterface copyCommand = new CopyCommand(viewPanel);
+                copyCommand.execute();
             }
 
             @Override
             public void pasteItemClicked(MenuBarEvent event) {
-                System.out.println("Paste item clicked");
+                CommandsInterface pasteCommand = new PasteCommand(viewPanel);
+                pasteCommand.execute();
             }
 
             @Override
             public void cutItemClicked(MenuBarEvent event) {
-                System.out.println("Cut item clicked");
+                CommandsInterface cutCommand = new CutCommand(viewPanel);
+                cutCommand.execute();
             }
 
             @Override
             public void selectAllItemClicked(MenuBarEvent event) {
-                System.out.println("Select all item clicked");
+                CommandsInterface selectAllCommand = new SelectAllCommand(viewPanel);
+                selectAllCommand.execute();
             }
 
             @Override
@@ -153,32 +158,26 @@ public class MainFrame extends JFrame {
 
             @Override
             public void textSelected(ViewPanelEvent event) {
-                System.out.println("Text selected");
             }
 
             @Override
             public void textCopied(ViewPanelEvent event) {
-                System.out.println("Text copied");
             }
 
             @Override
             public void textPasted(ViewPanelEvent event) {
-                System.out.println("Text pasted");
             }
 
             @Override
             public void textCut(ViewPanelEvent event) {
-                System.out.println("Text cut");
             }
 
             @Override
             public void textUndo(ViewPanelEvent event) {
-                System.out.println("Text undo");
             }
 
             @Override
             public void textRedo(ViewPanelEvent event) {
-                System.out.println("Text redo");
             }
 
             @Override
@@ -193,14 +192,12 @@ public class MainFrame extends JFrame {
 
             @Override
             public void textSelectAll(ViewPanelEvent event) {
-                System.out.println("Text select all");
             }
 
             @Override
             public void textDeleted(ViewPanelEvent event) {
-                System.out.println("Text deleted");
             }
-            
+
         });
 
         viewPanel.actionComponents();

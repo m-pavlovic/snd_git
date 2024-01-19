@@ -10,7 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ViewPanel extends JPanel {
-    
+
 
     private static final String ViewPanelListener = null;
     private JScrollPane scrollPane;
@@ -48,7 +48,7 @@ public class ViewPanel extends JPanel {
         popupMenu.add(cutItem);
         popupMenu.add(selectAllItem);
         popupMenu.add(deleteItem);
-        
+
         scrollPane.setViewportView(textArea);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         setBackground(Color.BLACK);
@@ -82,40 +82,50 @@ public class ViewPanel extends JPanel {
         copyItem.addActionListener(e -> {
             if (listener != null) {
                 listener.textCopied(new ViewPanelEvent(this));
+                CommandsInterface copyCommand = new CopyCommand(this);
+                copyCommand.execute();
             }
         });
 
         pasteItem.addActionListener(e -> {
             if (listener != null) {
                 listener.textPasted(new ViewPanelEvent(this));
+                CommandsInterface pasteCommand = new PasteCommand(this);
+                pasteCommand.execute();
             }
         });
 
         cutItem.addActionListener(e -> {
             if (listener != null) {
                 listener.textCut(new ViewPanelEvent(this));
+                CommandsInterface cutCommand = new CutCommand(this);
+                cutCommand.execute();
             }
         });
 
         selectAllItem.addActionListener(e -> {
             if (listener != null) {
                 listener.textSelectAll(new ViewPanelEvent(this));
+                CommandsInterface selectAllCommand = new SelectAllCommand(this);
+                selectAllCommand.execute();
             }
         });
 
         deleteItem.addActionListener(e -> {
             if (listener != null) {
                 listener.textDeleted(new ViewPanelEvent(this));
+                CommandsInterface deleteCommand = new DeleteCommand(this);
+                deleteCommand.execute();
             }
         });
 
     }
 
-    public void setTextArea(String string) {
-        textArea.setText(string);
+    public void setTextArea(String text) {
+        textArea.setText(text);
     }
 
-    public String getTextArea() {
-        return textArea.getText();
+    public JTextArea getTextArea() {
+        return textArea;
     }
 }
