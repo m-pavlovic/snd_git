@@ -40,17 +40,43 @@ public class MainFrame extends JFrame {
         menuBar.setMenuBarListener(new MenuBarListener() {
             @Override
             public void loadItemClicked(MenuBarEvent event) {
-                System.out.println("Load item clicked");
+                JOptionPane.showMessageDialog(MainFrame.this, "Load item clicked");
+                //open joption pane with file chooser
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.showOpenDialog(MainFrame.this);
+                String path = fileChooser.getSelectedFile().getAbsolutePath();
+                if (path.endsWith(".txt")) {
+                    ReadWriteStrategy readWriteStrategy = new ReadWriteTxt();
+                    StringBuffer sb = readWriteStrategy.loadFromFile(path);
+                    viewPanel.setTextArea(sb.toString());
+                } else if (path.endsWith(".bin")) {
+                    ReadWriteStrategy readWriteStrategy = new ReadWriteBin();
+                    StringBuffer sb = readWriteStrategy.loadFromFile(path);
+                    viewPanel.setTextArea(sb.toString());
+                } else {
+                    System.out.println("Unknown");
+                }
             }
 
             @Override
             public void saveItemClicked(MenuBarEvent event) {
-                System.out.println("Save item clicked");
+                JOptionPane.showMessageDialog(MainFrame.this, "Save item clicked");
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.showSaveDialog(MainFrame.this);
+                String path = fileChooser.getSelectedFile().getAbsolutePath();
+                if (path.endsWith(".txt")) {
+                    ReadWriteStrategy readWriteStrategy = new ReadWriteTxt();
+                    readWriteStrategy.saveToFile(path, viewPanel.getTextArea());
+                } else if (path.endsWith(".bin")) {
+                    ReadWriteStrategy readWriteStrategy = new ReadWriteBin();
+                    readWriteStrategy.saveToFile(path, viewPanel.getTextArea());
+                } else {
+                    System.out.println("Unknown");
+                }
             }
 
             @Override
             public void copyItemClicked(MenuBarEvent event) {
-                System.out.println("Copy item clicked");
             }
 
             @Override

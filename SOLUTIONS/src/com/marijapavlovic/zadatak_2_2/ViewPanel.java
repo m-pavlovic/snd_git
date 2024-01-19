@@ -111,4 +111,12 @@ public class ViewPanel extends JPanel {
         });
 
     }
+
+    public void setTextArea(String string) {
+        textArea.setText(string);
+    }
+
+    public Object getTextArea() {
+        return textArea;
+    }
 }
