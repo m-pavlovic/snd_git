@@ -1,35 +1,39 @@
 package com.marijapavlovic.zadatak_2_2;
 
-import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 
 public class PasteCommand implements CommandsInterface {
-
     private ViewPanel viewPanel;
-    String selectedText;
+    private String pastedText;
+    private String previousClipboardText;
+    private int pastePosition;
 
     public PasteCommand(ViewPanel viewPanel) {
         this.viewPanel = viewPanel;
     }
 
-
     @Override
     public void execute() {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        StringSelection stringSelection = new StringSelection(selectedText);
-        clipboard.setContents(stringSelection, null);
-        if (selectedText != null) {
-            viewPanel.getTextArea().replaceSelection(selectedText);
+        try {
+            previousClipboardText = (String) clipboard.getData(DataFlavor.stringFlavor);
+            pastedText = previousClipboardText;
+            pastePosition = viewPanel.getTextArea().getCaretPosition();
+            viewPanel.getTextArea().insert(pastedText, pastePosition);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
 
     @Override
     public void unexecute() {
-        if (selectedText != null) {
-            viewPanel.getTextArea().replaceSelection("");
-        }
+        viewPanel.getTextArea().select(pastePosition, pastePosition + pastedText.length());
+        viewPanel.getTextArea().replaceSelection("");
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        StringSelection stringSelection = new StringSelection(previousClipboardText);
+        clipboard.setContents(stringSelection, null);
     }
 }
