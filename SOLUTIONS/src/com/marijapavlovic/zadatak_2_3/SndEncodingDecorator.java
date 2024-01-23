@@ -1,5 +1,7 @@
 package com.marijapavlovic.zadatak_2_3;
 
+import javax.swing.*;
+
 public class SndEncodingDecorator extends TextAreaDecorator {
 
     public SndEncodingDecorator(TextAreaInterface textAreaInterface) {
@@ -7,7 +9,7 @@ public class SndEncodingDecorator extends TextAreaDecorator {
     }
 
     @Override
-    public String getTextArea() {
+    public JTextArea getTextArea() {
         return textAreaInterface.getTextArea();
     }
 
@@ -18,19 +20,25 @@ public class SndEncodingDecorator extends TextAreaDecorator {
 
     @Override
     public void encodeTextArea() {
-        String text = String.valueOf(textAreaInterface.getTextArea());
-        String encodedText = "";
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (c == 'a') {
-                encodedText += 'z';
-            } else if (c == 'A') {
-                encodedText += 'Z';
-            } else {
-                encodedText += (char) (c - 1);
+        if (getTextArea() == null) {
+            JOptionPane.showMessageDialog(null, "No text to encode!");
+            return;
+        } else {
+            StringBuilder encoded = new StringBuilder(getTextArea().getText());
+            for (char c : getTextArea().getText().toCharArray()) {
+                if (c >= 'a' && c <= 'z') {
+                    c++;
+                } else if (c == 'z') {
+                    c = 'a';
+                } else if (c >= 'A' && c <= 'Z') {
+                    c++;
+                } else if (c == 'Z') {
+                    c = 'A';
+                }
+                encoded.append(c);
             }
+            setTextArea(encoded.toString());
         }
-        textAreaInterface.setTextArea(encodedText);
     }
     
 }

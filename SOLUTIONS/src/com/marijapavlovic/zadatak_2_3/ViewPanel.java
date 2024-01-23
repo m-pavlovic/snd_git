@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class ViewPanel extends JPanel {
+public class ViewPanel extends JPanel implements TextAreaInterface {
 
 
     private JScrollPane scrollPane;
@@ -53,15 +53,16 @@ public class ViewPanel extends JPanel {
 
     }
 
-    
+    @Override
     public void setTextArea(String text) {
         textArea.setText(text);
     }
 
-
+    @Override
     public JTextArea getTextArea() {
         return textArea;
     }
+
 
     public void deselectAllText() {
         textArea.select(0, 0);
@@ -74,5 +75,4 @@ public class ViewPanel extends JPanel {
     public void setPopUpMenu(PopUpMenu popUpMenu) {
         this.popUpMenu = popUpMenu;
     }
-
 }

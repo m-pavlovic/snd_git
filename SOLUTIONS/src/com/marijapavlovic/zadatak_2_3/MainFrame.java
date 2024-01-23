@@ -32,6 +32,7 @@ public class MainFrame extends JFrame {
     private void initComponents() {
         menuBar = new MenuBar();
         viewPanel = new ViewPanel();
+        textAreaInterface = new ViewPanel();
         popUpMenu = new PopUpMenu(viewPanel);
         undoRedoManager = new UndoRedoManager();
         viewPanel.setComponentPopupMenu(popUpMenu);
@@ -148,18 +149,21 @@ public class MainFrame extends JFrame {
 
             @Override
             public void fstEncodingItemClicked(MenuBarEvent event) {
-                textAreaInterface = new SelectedText(viewPanel.getTextArea());
+                textAreaInterface = new ViewPanel();
+                textAreaInterface.getTextArea().setText(viewPanel.getTextArea().getText());
                 textAreaDecorator = new FstEncodingDecorator(textAreaInterface);
                 textAreaDecorator.encodeTextArea();
-                viewPanel.setTextArea(textAreaDecorator.getTextArea());
+                viewPanel.setTextArea(textAreaDecorator.getTextArea().getText());
             }
 
             @Override
             public void sndEncodingItemClicked(MenuBarEvent event) {
-                textAreaInterface = new SelectedText(viewPanel.getTextArea());
+                textAreaInterface = new ViewPanel();
+                textAreaInterface.getTextArea().setText(viewPanel.getTextArea().getText());
                 textAreaDecorator = new SndEncodingDecorator(textAreaInterface);
                 textAreaDecorator.encodeTextArea();
-                viewPanel.setTextArea(textAreaDecorator.getTextArea());
+                viewPanel.setTextArea(textAreaDecorator.getTextArea().getText());
+
             }
         });
     }

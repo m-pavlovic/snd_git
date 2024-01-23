@@ -1,10 +1,11 @@
 package com.marijapavlovic.zadatak_2_3;
 
+
+import javax.swing.*;
+
 public interface TextAreaInterface {
-    
 
-
-    String getTextArea();
+    JTextArea getTextArea();
 
     void setTextArea(String string);
 
