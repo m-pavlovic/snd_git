@@ -26,7 +26,8 @@ public class FstEncodingDecorator extends TextAreaDecorator {
             JOptionPane.showMessageDialog(null, "No text to encode!");
             return;
         } else {
-            StringBuilder encoded = new StringBuilder(textArea);
+            StringBuilder encoded = new StringBuilder();
+
             for (char c : textArea.toCharArray()) {
                 if (c >= 'a' && c <= 'z') {
                     c++;
@@ -39,9 +40,12 @@ public class FstEncodingDecorator extends TextAreaDecorator {
                 }
                 encoded.append(c);
             }
+
+            textAreaInterface.getTextArea().setText("");
             textAreaInterface.setTextArea(encoded.toString());
         }
     }
+
 
 
 

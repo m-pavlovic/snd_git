@@ -20,25 +20,28 @@ public class SndEncodingDecorator extends TextAreaDecorator {
 
     @Override
     public void encodeTextArea() {
-        if (getTextArea() == null) {
+        String textArea = String.valueOf(textAreaInterface.getTextArea().getText());
+        if (textArea == null) {
             JOptionPane.showMessageDialog(null, "No text to encode!");
             return;
         } else {
-            StringBuilder encoded = new StringBuilder(getTextArea().getText());
-            for (char c : getTextArea().getText().toCharArray()) {
+            StringBuilder encoded = new StringBuilder();
+
+            for (char c : textArea.toCharArray()) {
                 if (c >= 'a' && c <= 'z') {
-                    c++;
-                } else if (c == 'z') {
-                    c = 'a';
+                    c--;
+                } else if (c == 'a') {
+                    c = 'z';
                 } else if (c >= 'A' && c <= 'Z') {
-                    c++;
-                } else if (c == 'Z') {
-                    c = 'A';
+                    c--;
+                } else if (c == 'A') {
+                    c = 'Z';
                 }
                 encoded.append(c);
             }
-            setTextArea(encoded.toString());
+            textAreaInterface.getTextArea().setText("");
+            textAreaInterface.setTextArea(encoded.toString());
         }
     }
-    
+
 }

@@ -23,7 +23,7 @@ public class ViewPanel extends JPanel implements TextAreaInterface {
     public void initComponents() {
         popUpMenu = new PopUpMenu(this);
         scrollPane = new JScrollPane();
-        textArea = new JTextArea(20, 35);
+        textArea = new JTextArea(20, 58);
     }
 
     public void layoutComponents() {
