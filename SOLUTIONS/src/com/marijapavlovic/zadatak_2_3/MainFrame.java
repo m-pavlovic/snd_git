@@ -149,20 +149,18 @@ public class MainFrame extends JFrame {
 
             @Override
             public void fstEncodingItemClicked(MenuBarEvent event) {
-                textAreaInterface = new ViewPanel();
-                textAreaInterface.getTextArea().setText(viewPanel.getTextArea().getText());
-                textAreaDecorator = new FstEncodingDecorator(textAreaInterface);
+                JTextArea text = viewPanel.getTextArea();
+                textAreaDecorator = new FstEncodingDecorator(new SelectedText(text));
                 textAreaDecorator.encodeTextArea();
-                viewPanel.setTextArea(textAreaDecorator.getTextArea().getText());
+                viewPanel.getTextArea().setText(textAreaDecorator.getTextArea().getText());
             }
 
             @Override
             public void sndEncodingItemClicked(MenuBarEvent event) {
-                textAreaInterface = new ViewPanel();
-                textAreaInterface.getTextArea().setText(viewPanel.getTextArea().getText());
-                textAreaDecorator = new SndEncodingDecorator(textAreaInterface);
+                JTextArea text = viewPanel.getTextArea();
+                textAreaDecorator = new SndEncodingDecorator(new SelectedText(text));
                 textAreaDecorator.encodeTextArea();
-                viewPanel.setTextArea(textAreaDecorator.getTextArea().getText());
+                viewPanel.getTextArea().setText(textAreaDecorator.getTextArea().getText());
 
             }
         });
