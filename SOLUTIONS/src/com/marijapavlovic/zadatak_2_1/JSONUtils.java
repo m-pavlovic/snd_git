@@ -29,6 +29,7 @@ public class JSONUtils<E> implements WebDataProcessor<E> {
     public void saveDataToFile(List<E> data, String pathToFile) {
         try (FileWriter writer = new FileWriter(pathToFile)) {
             gson.toJson(data, writer);
+            System.out.println("Data saved to file: " + pathToFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
