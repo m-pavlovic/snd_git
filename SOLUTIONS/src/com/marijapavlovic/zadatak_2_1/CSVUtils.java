@@ -1,15 +1,14 @@
 package com.marijapavlovic.zadatak_2_1;
 
-import com.opencsv.*;
+import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.exceptions.CsvValidationException;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.io.StringReader;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
@@ -91,46 +90,43 @@ public class CSVUtils<E> implements DataProcessor<E> {
         System.out.println("Index out of bounds -> max index: " + (data.size() - 1) + " and you tried to access index: " + index + "!");
     }
 }
-
     @Override
     public Map<String, Integer> findAllDoubleFields(List<E> data) {
-        if (data.size() > 0) {
-            Map<String, Integer> doubleFields = new HashMap<>();
-            E firstRecord = data.get(0);
-            int i = 0;
-            for (String field : firstRecord.toString().split("\\s*\\|\\s*")) {
-                try {
-                    Double.parseDouble(field);
-                    doubleFields.put(field, i);
-                } catch (NumberFormatException e) {
-                    // Ignore
-                }
-                i++;
-            }
+        Map<String, Integer> doubleFields = new HashMap<>();
+        if (data.isEmpty()) {
             return doubleFields;
-        } else {
-            return null;
-            
         }
+        Field[] fields = data.get(0).getClass().getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getType().equals(double.class)) {
+                doubleFields.put(fields[i].getName(), i);
+            }
+        }
+        return doubleFields;
+
     }
 
     @Override
     public Map<String, Double> calculateAvgValues(List<E> data, Map<String, Integer> doubleFields) {
-        if (data.size() > 0) {
-            Map<String, Double> avgValues = new HashMap<>();
-            for (Map.Entry<String, Integer> entry : doubleFields.entrySet()) {
-                String fieldName = entry.getKey();
-                int fieldIndex = entry.getValue();
-                double sum = 0;
-                for (E record : data) {
-                    String[] fields = record.toString().split("\\s*\\|\\s*");
-                    sum += Double.parseDouble(fields[fieldIndex]);
-                }
-                avgValues.put(fieldName, sum / data.size());
-            }
+        Map<String, Double> avgValues = new HashMap<>();
+        if (data.isEmpty()) {
             return avgValues;
-        } else {
-            return null;
         }
+        for (Map.Entry<String, Integer> entry : doubleFields.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            double sum = 0;
+            for (E record : data) {
+                try {
+                    Field field = record.getClass().getDeclaredFields()[value];
+                    field.setAccessible(true);
+                    sum += field.getDouble(record);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            avgValues.put(key, sum / data.size());
+        }
+        return avgValues;
     }
 }

@@ -37,6 +37,13 @@ public class JSONUtils<E> implements WebDataProcessor<E> {
     @Override
     public void listAllFetchRecords(List<E> data) {
         System.out.println("========================================= ALL RECORDS ============================================");
+        String headers = "";
+        JsonObject jsonObject = gson.toJsonTree(data.get(0)).getAsJsonObject();
+        for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+            String key = entry.getKey();
+            headers += key + " | ";
+        }
+        System.out.println(headers);
         for (E record : data) {
             System.out.println(record);
         }
@@ -53,43 +60,38 @@ public class JSONUtils<E> implements WebDataProcessor<E> {
 
     @Override
     public Map<String, Integer> findDoubleFields(List<E> data) {
-        if (data.size() > 0) {
-            Map<String, Integer> doubleFields = new HashMap<>();
-            E firstRecord = data.get(0);
-            int i = 0;
-            for (String field : firstRecord.toString().split("\\s*\\|\\s*")) {
-                try {
-                    Double.parseDouble(field);
-                    doubleFields.put(field, i);
-                } catch (NumberFormatException e) {
-                    // Ignore
-                }
-                i++;
-            }
+        Map<String, Integer> doubleFields = new HashMap<>();
+        if (data.isEmpty()) {
             return doubleFields;
-        } else {
-            return null;
         }
+        JsonObject jsonObject = gson.toJsonTree(data.get(0)).getAsJsonObject();
+        for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+            String key = entry.getKey();
+            JsonElement value = entry.getValue();
+            if (value.isJsonPrimitive() && value.getAsJsonPrimitive().isNumber()) {
+                doubleFields.put(key, 0);
+            }
+        }
+        return doubleFields;
     }
 
     @Override
     public Map<String, Double> calculateAvgValues(List<E> data, Map<String, Integer> doubleFields) {
-        if (data.size() > 0) {
-            Map<String, Double> avgValues = new HashMap<>();
-            for (Map.Entry<String, Integer> entry : doubleFields.entrySet()) {
-                String key = entry.getKey();
-                Integer value = entry.getValue();
-                double sum = 0;
-                for (E record : data) {
-                    String[] fields = record.toString().split("\\s*\\|\\s*");
-                    sum += Double.parseDouble(fields[value]);
-                }
-                avgValues.put(key, sum / data.size());
-            }
+        Map<String, Double> avgValues = new HashMap<>();
+        if (data.isEmpty()) {
             return avgValues;
-        } else {
-            return null;
         }
+        for (Map.Entry<String, Integer> entry : doubleFields.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            double sum = 0;
+            for (E record : data) {
+                JsonObject jsonObject = gson.toJsonTree(record).getAsJsonObject();
+                sum += jsonObject.get(key).getAsDouble();
+            }
+            avgValues.put(key, sum / data.size());
+        }
+        return avgValues;
     }
 
 }
