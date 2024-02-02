@@ -30,7 +30,7 @@ public class CutCommand implements CommandsInterface {
     }
 
     @Override
-    public void unexecute() {
+    public void undoCommand() {
         viewPanel.getTextArea().insert(cutText, cutStart);
         viewPanel.getTextArea().setSelectionStart(cutStart);
         viewPanel.getTextArea().setSelectionEnd(cutEnd);

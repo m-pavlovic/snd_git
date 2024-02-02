@@ -29,7 +29,7 @@ public class PasteCommand implements CommandsInterface {
     }
 
     @Override
-    public void unexecute() {
+    public void undoCommand() {
         viewPanel.getTextArea().select(pastePosition, pastePosition + pastedText.length());
         viewPanel.getTextArea().replaceSelection("");
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();

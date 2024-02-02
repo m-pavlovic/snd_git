@@ -20,7 +20,7 @@ public class DeleteCommand implements CommandsInterface {
     }
 
     @Override
-    public void unexecute() {
+    public void undoCommand() {
         if (deletedText != null) {
             viewPanel.getTextArea().insert(deletedText, deletePosition);
         }
