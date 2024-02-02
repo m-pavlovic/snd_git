@@ -1,5 +1,6 @@
 package com.marijapavlovic.zadatak_2_3;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 
@@ -18,6 +19,7 @@ public class UndoRedoManager {
             CommandsInterface command = undoStack.pop();
             command.unexecute();
             redoStack.push(command);
+            System.out.println(undoStack);
         }
     }
 
@@ -26,6 +28,7 @@ public class UndoRedoManager {
             CommandsInterface command = redoStack.pop();
             command.execute();
             undoStack.push(command);
+            System.out.println(redoStack);
         }
     }
 }
