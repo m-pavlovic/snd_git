@@ -2,6 +2,8 @@ package com.marijapavlovic.zadatak_2_2;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.io.File;
 
 public class MainFrame extends JFrame {
@@ -23,6 +25,7 @@ public class MainFrame extends JFrame {
         initComponents();
         layoutComponents();
         actionComponents();
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(""), null);
         setVisible(true);
 
     }
@@ -33,6 +36,8 @@ public class MainFrame extends JFrame {
         popUpMenu = new PopUpMenu(viewPanel);
         undoRedoManager = new UndoRedoManager();
         viewPanel.setComponentPopupMenu(popUpMenu);
+        viewPanel.setPopUpMenu(popUpMenu);
+        viewPanel.setUndoRedoManager(undoRedoManager);
         fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File("DATA"));
         FileNameExtensionFilter filter1 = new FileNameExtensionFilter(

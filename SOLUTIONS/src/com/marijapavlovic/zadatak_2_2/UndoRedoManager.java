@@ -1,5 +1,6 @@
 package com.marijapavlovic.zadatak_2_2;
 
+import javax.swing.*;
 import java.util.Stack;
 
 
@@ -19,6 +20,8 @@ public class UndoRedoManager {
             command.undoCommand();
             redoStack.push(command);
             System.out.println(undoStack);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nothing to undo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -28,6 +31,8 @@ public class UndoRedoManager {
             command.execute();
             undoStack.push(command);
             System.out.println(redoStack);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nothing to redo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

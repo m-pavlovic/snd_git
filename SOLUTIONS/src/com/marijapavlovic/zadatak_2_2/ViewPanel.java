@@ -32,6 +32,7 @@ public class ViewPanel extends JPanel {
         setBackground(Color.BLACK);
         textArea.setBackground(Color.BLACK);
         textArea.setForeground(Color.WHITE);
+        textArea.requestFocusInWindow();
         textArea.setFont(new Font("Courier New", Font.PLAIN, 22));
         add(scrollPane);
         textArea.addMouseListener(new MouseAdapter() {
@@ -73,6 +74,10 @@ public class ViewPanel extends JPanel {
 
     public void setPopUpMenu(PopUpMenu popUpMenu) {
         this.popUpMenu = popUpMenu;
+    }
+
+    public void setUndoRedoManager(UndoRedoManager undoRedoManager) {
+        this.popUpMenu.setUndoRedoManager(undoRedoManager);
     }
 
 }

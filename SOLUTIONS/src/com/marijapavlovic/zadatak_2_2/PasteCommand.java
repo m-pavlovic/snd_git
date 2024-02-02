@@ -1,5 +1,6 @@
 package com.marijapavlovic.zadatak_2_2;
 
+import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -24,7 +25,7 @@ public class PasteCommand implements CommandsInterface {
             pastePosition = viewPanel.getTextArea().getCaretPosition();
             viewPanel.getTextArea().insert(pastedText, pastePosition);
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(viewPanel, "Clipboard is empty or does not contain text", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
