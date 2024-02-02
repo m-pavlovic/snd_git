@@ -25,7 +25,7 @@ public class CopyCommand implements CommandsInterface {
 
 
     @Override
-    public void unexecute() {
+    public void undoCommand() {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         if (previousClipboardText != null) {
             StringSelection stringSelection = new StringSelection(previousClipboardText);

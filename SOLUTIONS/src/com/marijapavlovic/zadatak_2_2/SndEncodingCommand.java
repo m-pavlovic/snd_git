@@ -7,7 +7,7 @@ public class SndEncodingCommand implements CommandsInterface {
     }
 
     @Override
-    public void unexecute() {
+    public void undoCommand() {
 
     }
 }

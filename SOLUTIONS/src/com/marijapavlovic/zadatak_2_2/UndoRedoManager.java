@@ -16,7 +16,7 @@ public class UndoRedoManager {
     public void undo() {
         if (!undoStack.isEmpty()) {
             CommandsInterface command = undoStack.pop();
-            command.unexecute();
+            command.undoCommand();
             redoStack.push(command);
             System.out.println(undoStack);
         }

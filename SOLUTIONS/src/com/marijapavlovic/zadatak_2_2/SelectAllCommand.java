@@ -18,7 +18,7 @@ public class SelectAllCommand implements CommandsInterface {
     }
 
     @Override
-    public void unexecute() {
+    public void undoCommand() {
         viewPanel.getTextArea().setSelectionStart(previousSelectionStart);
         viewPanel.getTextArea().setSelectionEnd(previousSelectionEnd);
     }

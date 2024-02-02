@@ -7,7 +7,7 @@ public class FstEncodingCommand implements CommandsInterface {
     }
 
     @Override
-    public void unexecute() {
+    public void undoCommand() {
 
     }
 }
