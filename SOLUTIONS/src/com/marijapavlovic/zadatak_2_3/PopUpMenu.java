@@ -99,5 +99,8 @@ public class PopUpMenu extends JPopupMenu {
 
     }
 
-    
+
+    public void setUndoRedoManager(UndoRedoManager undoRedoManager) {
+        this.undoRedoManager = undoRedoManager;
+    }
 }

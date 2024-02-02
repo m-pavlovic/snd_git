@@ -13,6 +13,7 @@ public class ViewPanel extends JPanel implements TextAreaInterface {
     private JScrollPane scrollPane;
     private JTextArea textArea;
     private PopUpMenu popUpMenu;
+    private UndoRedoManager undoRedoManager;
 
 
     public ViewPanel() {
@@ -74,5 +75,9 @@ public class ViewPanel extends JPanel implements TextAreaInterface {
 
     public void setPopUpMenu(PopUpMenu popUpMenu) {
         this.popUpMenu = popUpMenu;
+    }
+
+    public void setUndoRedoManager(UndoRedoManager undoRedoManager) {
+        this.popUpMenu.setUndoRedoManager(undoRedoManager);
     }
 }

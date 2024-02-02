@@ -2,6 +2,8 @@ package com.marijapavlovic.zadatak_2_3;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.io.File;
 
 public class MainFrame extends JFrame {
@@ -25,6 +27,7 @@ public class MainFrame extends JFrame {
         initComponents();
         layoutComponents();
         actionComponents();
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(""), null);
         setVisible(true);
         
     }
