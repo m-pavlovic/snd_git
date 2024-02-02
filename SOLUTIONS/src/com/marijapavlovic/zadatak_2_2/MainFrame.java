@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
         layoutComponents();
         actionComponents();
         setVisible(true);
-        
+
     }
 
     private void initComponents() {
@@ -42,7 +42,7 @@ public class MainFrame extends JFrame {
         fileChooser.setFileFilter(filter1);
         fileChooser.addChoosableFileFilter(filter2);
         alignSaveWithExtensions();
-        
+
 
 
     }
@@ -146,15 +146,15 @@ public class MainFrame extends JFrame {
 
             @Override
             public void fstEncodingItemClicked(MenuBarEvent event) {
-                System.out.println("First encoding item clicked");
+                System.out.println("First encoding clicked");
             }
 
             @Override
             public void sndEncodingItemClicked(MenuBarEvent event) {
-                System.out.println("Second encoding item clicked");
+                System.out.println("Second encoding clicked");
             }
         });
     }
 
-    
+
 }

@@ -6,7 +6,7 @@ import java.awt.datatransfer.StringSelection;
 
 public class CutCommand implements CommandsInterface {
 
-    
+
     private ViewPanel viewPanel;
     private String cutText;
     private int cutStart;

@@ -1,7 +1,7 @@
 package com.marijapavlovic.zadatak_2_2;
 
 public class DeleteCommand implements CommandsInterface {
-    
+
     private ViewPanel viewPanel;
     private String deletedText;
     private int deletePosition;

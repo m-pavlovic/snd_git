@@ -48,7 +48,7 @@ public class ViewPanel extends JPanel {
                     popUpMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
             }
-        
+
         });
 
     }
@@ -69,10 +69,6 @@ public class ViewPanel extends JPanel {
 
     public String getSelectedText() {
         return textArea.getSelectedText();
-    }
-
-    public void pasteText(String text) {
-        textArea.insert(text, textArea.getCaretPosition());
     }
 
     public void setPopUpMenu(PopUpMenu popUpMenu) {

@@ -2,7 +2,6 @@ package com.marijapavlovic.zadatak_2_2;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 
 public class CopyCommand implements CommandsInterface {
